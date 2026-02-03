@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="UTF-8">
+    <title> UNWORDLE </title>
+
+ <link rel="stylesheet" href="/static/style.css">
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>UNWORDLE</h1>
+
+        <div id="board" class="board"></div>
+
+        <div class="controls">
+            <input id="guess" class="input" placeholder="Please type exactly 5 letters. " maxlength="5" />
+            <button id="submit" class ="btn primary">Submit</button>
+            <button id="newBtn" class="btn">New</button>
+        </div>
+
+        <div id="msg" class="msg"></div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>
