@@ -7,6 +7,7 @@ const msgEl = document.getElementById("msg");
 const WORD_LEN = 5;
 const MAX_ATTEMPTS = 6;
 let currentRow = 0;
+let secretWord = "leave";
 
 function setMsg(t) {
     msgEl.textContent = t || "";
@@ -64,13 +65,10 @@ if (found) {
 
 function previewGuest(text) {
     const rows = board.querySelectorAll(".row");
-    const tiles = rows[currentRow].querySelectorAll(".tile");
+    if (!rows[currentRow]) return;
 
-    for (let i = 0; i < WORD_LEN; i++) {
-        tiles[i].textContent = text[i]
-        ? text[i].toUpperCase()
-        : "";
-    }
+    const tiles = rows[currentRow].querySelectorAll(".tile");
+    
 }
 
 function onSubmit() {
