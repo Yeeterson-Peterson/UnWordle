@@ -28,10 +28,38 @@ function buildBoard() {
 
 function createGuess(guess) {
     const rows = board.querySelectorAll(".row");
-    const tiles = rows[currentRow].querySelectorAll(".tile")
-    for (let i = 0; i < WORD_LEN; i++) { tiles[i].textContent = guess[i]
+    const tiles = rows[currentRow].querySelectorAll(".tile");
+
+    const secretArr = secretWord.split("");
+    const used = Array(WORD_LEN).fill(false);
+
+    for (let i = 0; i < WORD_LEN; i++ ) {
+        tiles[i].textContent = guess[i].toUpperCase();
+
+        if (guess[i] === secretArr[i]) {
+            tiles[i].classList.add("correct");
+            used[i] = true;
+        }
+        }
+for (let i = 0; i < WORD_LEN; i++) {
+    if (tiles[i].classList.contains("correct")) continue;
+
+    let found = false;
+    for (let k = 0; k < WORD_LEN; k++) {
+        if (!used[k] && guess[i] === secretArr[k]) {
+            found = true;
+            used[j] = true;
+            break;
+        }
     }
-    currentRow += 1;
+}
+
+if (found) {
+    tiles[i].classList.add("present");
+} else {
+    tiles[i].classList.add("absent");
+}
+
 }
 
 function previewGuest(text) {
@@ -61,6 +89,12 @@ function onSubmit() {
     guessEl.value = "";
     guessEl.focus();
 
+    if (x=== secretWord) {
+        setMsg("You won!");
+        guessEl.disabled = true;
+        return;
+    }
+
     }
     function newGame() {
         currentRow = 0;
@@ -68,6 +102,7 @@ function onSubmit() {
         setMsg("Go for it!!");
         guessEl.value = "";
         guessEl.focus();
+        guessEl.disabled = false;
     }
 
     submitBtn.addEventListener("click", onSubmit);
