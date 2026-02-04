@@ -28,7 +28,7 @@ function buildBoard() {
 
 function createGuess(guess) {
     const rows = board.querySelectorAll(".rows");
-    const tiles = rows[currentRow].querySelectorAll(". tile")
+    const tiles = rows[currentRow].querySelectorAll(".tile")
     for (let i = 0; i < WORD_LEN; i++) { tiles[i].textContent = guess[i]
     }
     currentRow += 1;
