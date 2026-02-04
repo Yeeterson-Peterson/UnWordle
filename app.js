@@ -27,11 +27,22 @@ function buildBoard() {
 }
 
 function createGuess(guess) {
-    const rows = board.querySelectorAll(".rows");
+    const rows = board.querySelectorAll(".row");
     const tiles = rows[currentRow].querySelectorAll(".tile")
     for (let i = 0; i < WORD_LEN; i++) { tiles[i].textContent = guess[i]
     }
     currentRow += 1;
+}
+
+function previewGuest(text) {
+    const rows = board.querySelectorAll(".row");
+    const tiles = rows[currentRow].querySelectorAll(".tile");
+
+    for (let i = 0; i < WORD_LEN; i++) {
+        tiles[i].textContent = text[i]
+        ? text[i].toUpperCase()
+        : "";
+    }
 }
 
 function onSubmit() {
@@ -46,6 +57,7 @@ function onSubmit() {
     }
     setMsg("");
     createGuess(x);
+    previewGuess("");
     guessEl.value = "";
     guessEl.focus();
 
@@ -62,6 +74,16 @@ function onSubmit() {
     newBtn.addEventListener("click", newGame);
     guessEl.addEventListener("keydown", (e) => {
         if (e.key === "Enter") onSubmit();
+    });
+
+    guessEl.addEventListener("input", () => {
+        const val = guessEl.value
+        .toLowerCase()
+        .replace(/[^a-z]/g, "")
+        .slice(0, WORD_LEN)
+
+        guessEl.value = val;
+        previewGuess(val);
     });
 
     newGame();
