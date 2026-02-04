@@ -28,31 +28,42 @@ function buildBoard() {
 }
 
 function createGuess(guess) {
-    const rows = board.querySelectorAll(".row");
-    const tiles = rows[currentRow].querySelectorAll(".tile");
+   const rows = board.querySelectorAll(".row");
+   const row = rows[currentRow];
+   if (!row) return;
 
-    const secretArr = secretWord.split("");
-    const used = Array(WORD_LEN).fill(false);
+   const tiles = row.quwrySelectorAll(".tile");
 
-    for (let i = 0; i < WORD_LEN; i++ ) {
-        tiles[i].textContent = guess[i].toUpperCase();
+   tiles.forEach(t => t.classList.remove("correct", "present", "absent" ))
 
-        if (guess[i] === secretArr[i]) {
-            tiles[i].classList.add("correct");
-            used[i] = true;
-        }
-        }
+   const secretArr = secretWord.split("");
+   const used = Array(WORD_LEN).fill(false);
+
+   for (let i = 0; i < WORD_LEN; i++) {
+    tiles[i].textContent = guess[i].toUpperCase();
+    if (guess[i] === secretArr[i]) {
+        tiles[i].classList.add("correct");
+        used[i] = true;
+    }
+   }
+
 for (let i = 0; i < WORD_LEN; i++) {
     if (tiles[i].classList.contains("correct")) continue;
 
     let found = false;
-    for (let k = 0; k < WORD_LEN; k++) {
-        if (!used[k] && guess[i] === secretArr[k]) {
+    for (let x = 0; x < WORD_LEN; x++) {
+        if (!used[x] && guess[i] === secretArr[x]) {
             found = true;
-            used[j] = true;
+            used[k] = true;
             break;
         }
     }
+
+    tiles[i].classList.add(found ? "present" : "absent");
+
+}
+
+currentRow += 1;
 }
 
 if (found) {
@@ -61,17 +72,18 @@ if (found) {
     tiles[i].classList.add("absent");
 }
 
-}
+
 
 function previewGuest(text) {
     const rows = board.querySelectorAll(".row");
     if (!rows[currentRow]) return;
 
     const tiles = rows[currentRow].querySelectorAll(".tile");
-    
+
 }
 
 function onSubmit() {
+    console.log("submit clicked");
     const x = (guessEl.value || "").trim().toLowerCase();
     if (x.length !==5 || !/^[a-z]+$/.test(x)) {
         setMsg("Please have all words exactly 5 letters");
@@ -87,7 +99,7 @@ function onSubmit() {
     guessEl.value = "";
     guessEl.focus();
 
-    if (x=== secretWord) {
+    if (x === secretWord) {
         setMsg("You won!");
         guessEl.disabled = true;
         return;
