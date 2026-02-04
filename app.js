@@ -32,9 +32,9 @@ function createGuess(guess) {
    const row = rows[currentRow];
    if (!row) return;
 
-   const tiles = row.quwrySelectorAll(".tile");
+   const tiles = row.querySelectorAll(".tile");
 
-   tiles.forEach(t => t.classList.remove("correct", "present", "absent" ))
+   tiles.forEach(t => t.classList.remove("correct", "present", "absent" ));
 
    const secretArr = secretWord.split("");
    const used = Array(WORD_LEN).fill(false);
@@ -54,7 +54,7 @@ for (let i = 0; i < WORD_LEN; i++) {
     for (let x = 0; x < WORD_LEN; x++) {
         if (!used[x] && guess[i] === secretArr[x]) {
             found = true;
-            used[k] = true;
+            used[x] = true;
             break;
         }
     }
@@ -66,15 +66,9 @@ for (let i = 0; i < WORD_LEN; i++) {
 currentRow += 1;
 }
 
-if (found) {
-    tiles[i].classList.add("present");
-} else {
-    tiles[i].classList.add("absent");
-}
 
 
-
-function previewGuest(text) {
+function previewGuess(text) {
     const rows = board.querySelectorAll(".row");
     if (!rows[currentRow]) return;
 
