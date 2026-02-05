@@ -47,17 +47,7 @@ function createGuess(guess) {
         used[i] = true;
     }
 
-    if (x===secretWord) {
-        setMsg("Good job you won");
-        guessEl.disabled = true;
-        return;
 
-    }
-    if (currentRow >= MAX_ATTEMPTS) {
-        setMsg("You lost. The correct word was " + secretWord);
-        guessEl.disabled = true;
-        return;
-    }
    }
 
 for (let i = 0; i < WORD_LEN; i++) {
@@ -135,7 +125,7 @@ async function loadWords() {
         guessEl.focus();
         guessEl.disabled = false;
 
-        secretWord = wordList[Math.floor(Math.random() * wordList.length())]
+        secretWord = wordList[Math.floor(Math.random() * wordList.length)]
     }
 
     submitBtn.addEventListener("click", onSubmit);
@@ -149,9 +139,10 @@ async function loadWords() {
         .toLowerCase()
         .replace(/[^a-z]/g, "")
         .slice(0, WORD_LEN)
-        createGuess(x)
+        
         guessEl.value = val;
         previewGuess(val);
     });
 
+    loadWords();
     newGame();
