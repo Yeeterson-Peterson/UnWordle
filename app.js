@@ -85,8 +85,11 @@ function previewGuess(text) {
     const rows = board.querySelectorAll(".row");
     if (!rows[currentRow]) return;
 
-    const tiles = rows[currentRow].querySelectorAll(".tile");
 
+    const tiles = rows[currentRow].querySelectorAll(".tile");
+    for (let i = 0; i < WORD_LEN; i++) {
+        tiles[i].textContent = text[i] ? text[i].toUpperCase() : "";
+    }
 }
 
 function onSubmit() {
