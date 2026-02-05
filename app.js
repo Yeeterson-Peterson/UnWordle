@@ -104,7 +104,9 @@ function onSubmit() {
         guessEl.disabled = true;
         return;
     }
-
+    if (currentRow >= MAX_ATTEMPTS) {
+        setMsg("You lost. The correct word was ${secretWord.toUpperCase()}.");
+    }
     }
 
 async function loadWords() {
