@@ -7,7 +7,8 @@ const msgEl = document.getElementById("msg");
 const WORD_LEN = 5;
 const MAX_ATTEMPTS = 6;
 let currentRow = 0;
-let secretWord = "leave";
+let secretWord = "";
+let wordList = [];
 
 function setMsg(t) {
     msgEl.textContent = t || "";
@@ -100,6 +101,17 @@ function onSubmit() {
     }
 
     }
+
+async function loadWords() {
+    const res = await fetch("./allowed.txt");
+    const text = await res.text();
+    wordList = text
+    .split("\n")
+    .map(w => w.trim().toLowerCase())
+   .filter(w => w.length === WORD_LEN); 
+   secretWord = wordList[Math.floor(Math.random() * wordList.length)]
+   console.log("Secret word:", secretWord);
+}
     function newGame() {
         currentRow = 0;
         buildBoard();
@@ -107,6 +119,8 @@ function onSubmit() {
         guessEl.value = "";
         guessEl.focus();
         guessEl.disabled = false;
+
+        secretWord = wordList[Math.floor(Math.random() * wordList.length())]
     }
 
     submitBtn.addEventListener("click", onSubmit);
