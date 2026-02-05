@@ -54,7 +54,7 @@ function createGuess(guess) {
 
     }
     if (currentRow >= MAX_ATTEMPTS) {
-        setMsg("You lost");
+        setMsg("You lost. The correct word was " + secretWord);
         guessEl.disabled = true;
         return;
     }
