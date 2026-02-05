@@ -46,6 +46,18 @@ function createGuess(guess) {
         tiles[i].classList.add("correct");
         used[i] = true;
     }
+
+    if (x===secretWord) {
+        setMsg("Good job you won");
+        guessEl.disabled = true;
+        return;
+
+    }
+    if (currentRow >= MAX_ATTEMPTS) {
+        setMsg("You lost");
+        guessEl.disabled = true;
+        return;
+    }
    }
 
 for (let i = 0; i < WORD_LEN; i++) {
