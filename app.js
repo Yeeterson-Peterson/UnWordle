@@ -105,7 +105,7 @@ function onSubmit() {
         return;
     }
     if (currentRow >= MAX_ATTEMPTS) {
-        setMsg("You lost. The correct word was ${secretWord.toUpperCase()}.");
+        setMsg("You lost. The correct word was " + secretWord.toUpperCase() + ".");
     }
     }
 
