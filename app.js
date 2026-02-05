@@ -145,11 +145,11 @@ async function loadWords() {
     });
 
     guessEl.addEventListener("input", () => {
-        const val = guessEl.value
+        const val = (guessEl.value || "")
         .toLowerCase()
         .replace(/[^a-z]/g, "")
         .slice(0, WORD_LEN)
-
+        createGuess(x)
         guessEl.value = val;
         previewGuess(val);
     });
